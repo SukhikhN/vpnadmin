@@ -26,12 +26,32 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * Displays companies list.
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionCompanies()
     {
-        return $this->render('index');
+        return $this->render('companies');
+    }
+
+    /**
+     * Displays users list.
+     *
+     * @return string
+     */
+    public function actionUsers()
+    {
+        return $this->render('users');
+    }
+
+    /**
+     * Displays abusers page.
+     *
+     * @return string
+     */
+    public function actionAbusers()
+    {
+        return $this->render('abusers');
     }
 }

@@ -38,6 +38,9 @@ $config = [
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'company'],
+                '/' => 'site/companies',
+                '/page/users' => 'site/users',
+                '/page/abusers' => 'site/abusers'
             ],
         ],
     ],

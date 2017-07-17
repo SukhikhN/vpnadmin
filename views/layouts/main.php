@@ -3,10 +3,9 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use yii\helpers\Html;
-use yii\bootstrap\Nav;
+use yii\bootstrap\Html;
 use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
+use yii\widgets\Pjax;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -34,21 +33,29 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-        ],
-    ]);
     NavBar::end();
     ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
-    </div>
+    <?php Pjax::begin(['options' => ['class'=>'container'] ]); ?>
+    <?php
+    $links = [
+        'site/companies' => 'Companies',
+        'site/users' => 'Users',
+        'site/abusers' => 'Abusers',
+    ]
+    ?>
+    <ul class="nav nav-tabs">
+        <?php
+        $currRoute = Yii::$app->controller->route;
+        foreach ($links as $route => $text) {
+            echo Html::tag('li', Html::a(Html::encode($text), [$route]), [
+                'class' => $route===$currRoute? 'active' : false,
+            ]);
+        }
+        ?>
+    </ul>
+    <?= $content ?>
+    <?php Pjax::end(); ?>
 </div>
 
 <footer class="footer">
