@@ -3,16 +3,18 @@
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
-use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
 class SiteController extends Controller
 {
-
+    public $jsVars = [];
+    
+    public function init() {
+        parent::init();
+        $this->on(self::EVENT_BEFORE_ACTION, [$this, 'onBeforeAction']);
+    }
+    
     /**
      * @inheritdoc
      */
@@ -53,5 +55,10 @@ class SiteController extends Controller
     public function actionAbusers()
     {
         return $this->render('abusers');
+    }
+    
+    protected function onBeforeAction() {
+        $this->jsVars['action'] = $this->action->uniqueId;
+        $this->jsVars['apiUrl'] = Url::home(true);
     }
 }

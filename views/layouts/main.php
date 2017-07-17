@@ -66,6 +66,8 @@ AppAsset::register($this);
     </div>
 </footer>
 
+<?= $this->render('/_templates'); ?>
+
 <?php $this->endBody() ?>
 </body>
 </html>

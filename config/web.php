@@ -15,6 +15,9 @@ $config = [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
+        'view' => [
+            'class' => 'app\components\View',
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
