@@ -29,13 +29,28 @@ Api = (function() {
         }).done(function(data, textStatus, jqXHR){
             sending.resolveWith(window, [data]);
         }).fail(function(jqXHR, textStatus, errorThrown){
+            //by default take HTTP message as error
             var error = errorThrown;
+            
             var data;
             try {
                 data = $.parseJSON(jqXHR.responseText);
             } catch(e) {}
+            //try to get error message directly from response data
             if (data && data.message) {
                 error = data.message;
+            } else if ($.isArray(data)) {
+                //try to parse model validation messages and transform them to Yii Active Form format
+                var errors = {};
+                for (var i=0; i<data.length; i++) {
+                    var err = data[i];
+                    if (err.field && err.message) {
+                        errors[err.field] = errors[err.field] || [];
+                        errors[err.field].push(err.message);
+                    }
+                }
+                if (!$.isEmptyObject(errors))
+                    sending.rejectWith(window, [errors]);
             }
             
             sending.rejectWith(window, [error]);

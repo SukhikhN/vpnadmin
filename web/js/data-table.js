@@ -79,7 +79,7 @@ $.extend(DataTable.prototype, {
         self.cbLoadForm($row, type).done(function(html) {
             self.renderForm($row, type, html);
         }).fail(function(jqXHR, textStatus, errorThrown) {
-            alert(errorThrown);
+            self.handleError(errorThrown);
         });
     },
     /**
@@ -131,6 +131,20 @@ $.extend(DataTable.prototype, {
     },
     
     /**
+     * Handle AJAX errors
+     * 
+     * @param {string|Object} errors Error message or Yii Active Form messages object.
+     * @param {jQuery} $form Form which was submitted.
+     */
+    handleError: function(errors, $form) {
+        if (typeof errors === 'string') {
+            alert(errors);
+        } else if (typeof errors === 'object' && $form) {
+            $form.yiiActiveForm('updateMessages', errors);
+        }
+    },
+    
+    /**
      * Add or update item
      * 
      * @param {string} type 'add' for new item, 'edit' for item edit.
@@ -149,8 +163,8 @@ $.extend(DataTable.prototype, {
             } else {
                 $oldRow.remove(); //remove old item row finally after form closing
             }
-        }).fail(function(error) {
-            alert(error);
+        }).fail(function(errors) {
+            self.handleError(errors, $form);
         });
         return updating;
     },
@@ -161,10 +175,11 @@ $.extend(DataTable.prototype, {
      * @returns {jQuery.Deferred}
      */
     deleteItem: function($row) {
+        var self = this;
         return this.cbDeleteItem($row).done(function() {
             $row.remove();
         }).fail(function(error) {
-            alert(error);
+            self.handleError(error);
         });
     }
 });

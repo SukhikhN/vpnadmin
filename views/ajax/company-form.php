@@ -5,7 +5,11 @@ use yii\bootstrap\Html;
 use yii\bootstrap\ActiveForm;
 ?>
 
-<?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin([
+    'options' => [
+        'id' => 'company-form-'.$company->id,
+    ],
+]); ?>
 
 <?= Html::activeHiddenInput($company, 'id'); ?>
 <?= $form->field($company, 'name'); ?>
