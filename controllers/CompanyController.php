@@ -4,5 +4,5 @@ namespace app\controllers;
 
 class CompanyController extends RestController
 {
-    public $modelClass = 'app\models\User';
+    public $modelClass = 'app\models\Company';
 }
