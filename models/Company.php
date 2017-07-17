@@ -22,6 +22,10 @@ class Company extends \yii\db\ActiveRecord
     {
         return 'company';
     }
+    
+    public function formName() {
+        return '';
+    }
 
     /**
      * @inheritdoc
