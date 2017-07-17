@@ -13,6 +13,6 @@ $this->title = 'Companies';
     <tbody>
     </tbody>
     <tfoot><tr>
-        <td colspan="3"><button class="btn btn-primary" name="add-company">Add</button></td>
+        <td colspan="3"><button class="btn btn-primary" name="add">Add</button></td>
     </tr></tfoot>
 </table>

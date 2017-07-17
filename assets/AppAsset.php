@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
         'js/functions.js',
         'js/api.js',
         'js/tmpl.js',
+        'js/data-table.js',
         'js/site.js'
     ];
     public $depends = [
