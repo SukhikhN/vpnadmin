@@ -42,6 +42,8 @@ $config = [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'company'],
                 
+                'POST /generate' => 'abusers/generate',
+                
                 [
                     'pattern' => '/ajax/form/company/<id:\d+>',
                     'route' => 'ajax/company-form',

@@ -83,7 +83,15 @@ $(function() {
     }
     
     function actionAbusers() {
+        var $container = $('#abusers');
         
+        $container.on('click', '[name="generate"]', function() {
+            Api.generateTrafficData().done(function() {
+                alert('Traffic data generated successfully');
+            }).fail(function(error) {
+                alert(error);
+            });
+        });
     }
 
     $(document).on('pjax:end', function(xhr, options) {

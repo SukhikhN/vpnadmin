@@ -1,22 +1,27 @@
 <?php
-
 namespace app\controllers;
 
-use yii\rest\ActiveController;
+use yii\rest\Controller;
 
-class RestController extends ActiveController
-{
+class AbusersController extends Controller {
+    
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        
+
         //disable rate limiter
         if (isset($behaviors['rateLimiter']))
             unset($behaviors['rateLimiter']);
-        
+
         return $behaviors;
+    }
+    
+    public function actionGenerate() {
+        return [
+            'status' => \Yii::$app->response->statusCode,
+        ];
     }
 }

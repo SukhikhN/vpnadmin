@@ -85,6 +85,10 @@ Api = (function() {
         },
         deleteUser: function(id) {
             return request('DELETE', 'users/'+id);
+        },
+
+        generateTrafficData: function() {
+            return request('POST', 'generate');
         }
     }
 })();

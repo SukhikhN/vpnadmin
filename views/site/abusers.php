@@ -4,4 +4,6 @@
 
 $this->title = 'Abusers';
 ?>
-<h1>Abusers</h1>
+<div id="abusers">
+    <button class="btn btn-secondary" name="generate">Generate data</button>
+</div>
