@@ -7,9 +7,11 @@ use yii\bootstrap\Html;
 $this->title = 'Abusers';
 ?>
 <div id="abusers-container">
-    <?= Html::dropDownList('date', null, $months); ?>
-    <button class="btn btn-primary" name="report">Show report</button>
-    <button class="btn btn-secondary" name="generate">Generate data</button>
+    <form class="form-inline">
+        <?= Html::dropDownList('date', null, $months, ['class'=>'form-control']); ?>
+        <button class="btn btn-primary" name="report">Show report</button>
+        <button class="btn btn-secondary" name="generate">Generate data</button>
+    </form>
     
     <table id="abusers" class="table table-hover">
         <thead><tr>

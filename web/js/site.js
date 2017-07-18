@@ -128,6 +128,8 @@ $(function() {
             }).fail(function(error) {
                 alert(error);
             });
+            
+            return false;
         });
     }
     
