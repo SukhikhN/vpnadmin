@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use yii\rest\Controller;
+use app\models\Traffic;
 
 class AbusersController extends Controller {
     
@@ -19,7 +20,14 @@ class AbusersController extends Controller {
         return $behaviors;
     }
     
+    /**
+     * Generate random traffic data for last 6 months
+     * 
+     * @return array
+     */
     public function actionGenerate() {
+        Traffic::deleteAll();
+        Traffic::generate(new \DateTime('-6 months'), new \DateTime());
         return [
             'status' => \Yii::$app->response->statusCode,
         ];
