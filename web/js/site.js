@@ -45,7 +45,32 @@ $(function() {
     }
     
     function actionUsers() {
-        
+        var usersTable = new DataTable({
+            $container: $('#users'),
+            renderRow: function (user) {
+                var $row = $(tmpl('tmplUserRow', user));
+                $row.data('id', user.id);
+                return $row;
+            },
+            loadForm: function ($row, type) {
+                if (type === 'add')
+                    return $.get(Vars.apiUrl + 'ajax/form/user');
+                else
+                    return $.get(Vars.apiUrl + 'ajax/form/user/' + $row.data('id'));
+            },
+            getItems: $.proxy(Api.getUsers, Api),
+            addItem: function ($form) {
+                return Api.addUser($form);
+            },
+            editItem: function ($row, $form) {
+                return Api.editUser($row.data('id'), $form);
+            },
+            deleteItem: function ($row) {
+                return Api.deleteUser($row.data('id'));
+            }
+        });
+
+        usersTable.fill();
     }
     
     function actionAbusers() {

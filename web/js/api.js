@@ -72,6 +72,19 @@ Api = (function() {
         },
         deleteCompany: function(id) {
             return request('DELETE', 'companies/'+id);
+        },
+
+        getUsers: function() {
+            return request('GET', 'users');
+        },
+        addUser: function(userData) {
+            return request('POST', 'users', userData);
+        },
+        editUser: function(id, userData) {
+            return request('PUT', 'users/'+id, userData);
+        },
+        deleteUser: function(id) {
+            return request('DELETE', 'users/'+id);
         }
     }
 })();

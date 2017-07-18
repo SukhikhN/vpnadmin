@@ -47,6 +47,11 @@ $config = [
                     'route' => 'ajax/company-form',
                     'defaults' => ['id' => 0],
                 ],
+                [
+                    'pattern' => '/ajax/form/user/<id:\d+>',
+                    'route' => 'ajax/user-form',
+                    'defaults' => ['id' => 0],
+                ],
                 
                 '/' => 'site/companies',
                 '/page/users' => 'site/users',

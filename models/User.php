@@ -24,6 +24,10 @@ class User extends \yii\db\ActiveRecord
         return 'user';
     }
 
+    public function formName() {
+        return '';
+    }
+    
     /**
      * @inheritdoc
      */
