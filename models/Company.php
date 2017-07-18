@@ -23,10 +23,14 @@ class Company extends \yii\db\ActiveRecord
         return 'company';
     }
     
+    /**
+     * @inheritdoc
+     */
     public function formName() {
+        //reset form name so form fields will have same names as model attributes
         return '';
     }
-
+    
     /**
      * @inheritdoc
      */

@@ -23,8 +23,12 @@ class User extends \yii\db\ActiveRecord
     {
         return 'user';
     }
-
+    
+    /**
+     * @inheritdoc
+     */
     public function formName() {
+        //reset form name so form fields will have same names as model attributes
         return '';
     }
     
@@ -51,10 +55,23 @@ class User extends \yii\db\ActiveRecord
             'id' => 'ID',
             'email' => 'EMail',
             'name' => 'Name',
-            'company_id' => 'Company ID',
+            'company_id' => 'Company',
+            'company' => 'Company',
         ];
     }
-
+    
+    /**
+     * @inheritdoc
+     */
+    public function fields() {
+        return [
+            'id',
+            'name',
+            'email',
+            'company', //expanded company field in AJAX responses
+        ];
+    }
+    
     /**
      * @return \yii\db\ActiveQuery
      */
