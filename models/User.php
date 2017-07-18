@@ -41,6 +41,7 @@ class User extends \yii\db\ActiveRecord
             [['email', 'name', 'company_id'], 'required'],
             [['company_id'], 'integer'],
             [['email'], 'string', 'max' => 255],
+            [['email'], 'email'],
             [['name'], 'string', 'max' => 500],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
         ];
