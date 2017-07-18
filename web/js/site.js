@@ -31,10 +31,19 @@ $(function() {
             },
             getItems: $.proxy(Api.getCompanies, Api),
             addItem: function ($form) {
-                return Api.addCompany($form);
+                var formData = $form.serializeFormJSON();
+                var quota = Number(formData.quota);
+                if (!isNaN(quota))
+                    formData.quota = tbToB(quota);
+                return Api.addCompany(formData);
             },
             editItem: function ($row, $form) {
-                return Api.editCompany($row.data('id'), $form);
+                var formData = $form.serializeFormJSON();
+                //convert quota to bytes
+                var quota = Number(formData.quota);
+                if (!isNaN(quota))
+                    formData.quota = tbToB(quota);
+                return Api.editCompany($row.data('id'), formData);
             },
             deleteItem: function ($row) {
                 return Api.deleteCompany($row.data('id'));
