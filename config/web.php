@@ -43,6 +43,7 @@ $config = [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'company'],
                 
                 'POST /generate' => 'abusers/generate',
+                '/report/<year:\d\d\d\d>/<month:\d\d>' => 'abusers/report',
                 
                 [
                     'pattern' => '/ajax/form/company/<id:\d+>',

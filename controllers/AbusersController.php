@@ -32,4 +32,16 @@ class AbusersController extends Controller {
             'status' => \Yii::$app->response->statusCode,
         ];
     }
+    
+    /**
+     * Generate abusers report
+     * 
+     * @param $year
+     * @param $month
+     * @return array
+     */
+    public function actionReport($year, $month) {
+        $abusers = Traffic::abusers($year, $month)->all();
+        return $abusers;
+    }
 }

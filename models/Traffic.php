@@ -118,4 +118,34 @@ class Traffic extends \yii\db\ActiveRecord
                 $currEnd = $end;
         }
     }
+    
+    /**
+     * Construct query for companies that exceeded their traffic quota
+     * 
+     * @param int $year
+     * @param int $month
+     * @return \yii\db\Query
+     */
+    public static function abusers($year, $month) {
+        $abusersQuery = (new \yii\db\Query())->select([
+            'company.id',
+            'company.name',
+            'company.quota',
+            'SUM(bytes) as used',
+        ])
+            ->from(static::tableName())
+            ->leftJoin(User::tableName(), 'traffic.user_id = user.id')
+            ->leftJoin(Company::tableName(), 'user.company_id = company.id')
+            ->where('YEAR(date)=:year')
+            ->andWhere('MONTH(date)=:month')
+            ->groupBy(['company.id'])
+            ->having('used > company.quota')
+            ->orderBy(['used'=>SORT_DESC])
+            ->addParams([
+                ':year' => intval($year),
+                ':month' => intval($month),
+            ]);
+
+        return $abusersQuery;
+    }
 }
