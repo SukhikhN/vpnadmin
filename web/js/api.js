@@ -86,9 +86,18 @@ Api = (function() {
         deleteUser: function(id) {
             return request('DELETE', 'users/'+id);
         },
-
+        
         generateTrafficData: function() {
             return request('POST', 'generate');
+        },
+        /**
+         * Get abusers report
+         * 
+         * @param {string} date "year/month", e. g. "2017/03"
+         * @returns {jQuery.Deferred}
+         */
+        getAbusers: function(date) {
+            return request('GET', 'report/'+date);
         }
     }
 })();

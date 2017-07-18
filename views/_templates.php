@@ -20,3 +20,11 @@
         </td>
     </tr>
 </script>
+
+<script id="tmplAbuserRow" type="text/template">
+    <tr>
+        <td><%= name %></td>
+        <td><%= bToTb(used, 2) %> TB</td>
+        <td><%= bToTb(quota) %> TB</td>
+    </tr>
+</script>

@@ -148,4 +148,20 @@ class Traffic extends \yii\db\ActiveRecord
 
         return $abusersQuery;
     }
+    
+    /**
+     * Construct query for list of months when there was some traffic
+     * 
+     * @return \yii\db\Query
+     */
+    public static function activeMonths() {
+        $monthsQuery = (new \yii\db\Query())->select([
+            'MONTH(date) as month',
+            'YEAR(date) as year',
+        ])
+            ->distinct()
+            ->from(static::tableName());
+        
+        return $monthsQuery;
+    }
 }

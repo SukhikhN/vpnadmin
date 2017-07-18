@@ -1,4 +1,7 @@
 $(function() {
+    /**
+     * Execute controller function based on current action
+     */
     function doAction() {
         switch (Vars.action) {
             case 'site/companies':
@@ -14,7 +17,10 @@ $(function() {
                 console.error('Unknown action');
         }
     }
-    
+
+    /**
+     * Controller for companies list
+     */
     function actionCompanies() {
         var companiesTable = new DataTable({
             $container: $('#companies'),
@@ -52,7 +58,10 @@ $(function() {
         
         companiesTable.fill();
     }
-    
+
+    /**
+     * Controller for users list
+     */
     function actionUsers() {
         var usersTable = new DataTable({
             $container: $('#users'),
@@ -81,22 +90,50 @@ $(function() {
 
         usersTable.fill();
     }
-    
+
+    /**
+     * Controller for abusers page
+     */
     function actionAbusers() {
-        var $container = $('#abusers');
+        var $container = $('#abusers-container'),
+            $abusersRows = $container.find('#abusers tbody');
         
+        //generate traffic data
         $container.on('click', '[name="generate"]', function() {
             Api.generateTrafficData().done(function() {
+                //reload page because months list may be changed
+                $.pjax.reload('#pjax');
                 alert('Traffic data generated successfully');
+            }).fail(function(error) {
+                alert(error);
+            });
+            
+            return false;
+        });
+        
+        //show abusers report
+        $container.on('click', '[name="report"]', function() {
+            var date = $container.find('[name="date"]').val();
+            
+            $abusersRows.empty();
+            
+            if (date===null)
+                return false;
+            
+            Api.getAbusers(date).done(function(abusers) {
+                for (var i=0; i<abusers.length; i++) {
+                    var $row = $(tmpl('tmplAbuserRow', abusers[i]));
+                    $abusersRows.append($row);
+                }
             }).fail(function(error) {
                 alert(error);
             });
         });
     }
-
+    
+    //run actions on pjax navigation and after normal page load
     $(document).on('pjax:end', function(xhr, options) {
         doAction();
     });
-    
     doAction();
 });

@@ -36,7 +36,7 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <?php Pjax::begin(['options' => ['class'=>'container'] ]); ?>
+    <?php Pjax::begin(['options' => ['id'=>'pjax', 'class'=>'container'] ]); ?>
     <?php
     $links = [
         'site/companies' => 'Companies',
