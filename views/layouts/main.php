@@ -44,7 +44,7 @@ AppAsset::register($this);
         'site/abusers' => 'Abusers',
     ]
     ?>
-    <ul class="nav nav-tabs">
+    <ul id="tabs" class="nav nav-tabs">
         <?php
         $currRoute = Yii::$app->controller->route;
         foreach ($links as $route => $text) {
@@ -54,13 +54,16 @@ AppAsset::register($this);
         }
         ?>
     </ul>
+    <div class="page-container">
     <?= $content ?>
+    </div>
+    <div class="loader"></div>
     <?php Pjax::end(); ?>
 </div>
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Nick Sukhikh <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

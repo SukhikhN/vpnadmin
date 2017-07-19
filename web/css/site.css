@@ -14,9 +14,92 @@ body {
     padding: 70px 15px 20px;
 }
 
-.nav-tabs {
-    margin-bottom: 20px;
+.page-container {
+    padding-top: 20px;
 }
+
+#pjax {
+    position: relative;
+}
+#pjax.loading {
+    min-height: 500px;
+}
+#pjax.loading .loader {
+    display: block;
+}
+#pjax.loading .page-container {
+    display: none;
+}
+
+.table-container {
+    position: relative;
+}
+.table-container.loading {
+    min-height: 250px;
+}
+.table-container.loading .loader {
+    display: block;
+}
+.table-container.loading tbody, .table-container.loading tfoot {
+    display: none;
+}
+
+.table tr {
+    position: relative;
+}
+.table tr.loading {
+    height: 51px;
+}
+.table tr.loading .loader {
+    display: block;
+}
+
+.table td.controls .loader, .form-inline .loader {
+    position: static;
+    margin: 0;
+    vertical-align: middle;
+}
+.table td.controls.loading .loader, .form-inline.loading .loader {
+    display: inline-block;
+}
+
+/*
+ * Table layouts
+ */
+.table {
+    table-layout: fixed;
+}
+#companies th.name {
+    width: 50%;
+}
+#companies th.quota {
+    width: 25%;
+}
+#companies th.controls {
+    width: 25%;
+}
+#users th.name {
+    width: 30%;
+}
+#users th.email {
+    width: 20%;
+}
+#users th.company {
+    width: 35%;
+}
+#users th.controls {
+    width: 15%;
+}
+#abusers th.company {
+    width: 50%;
+}
+#abusers th.used {
+    width: 25%;
+}
+#abusers th.quota {
+    width: 25%;
+}
+
 
 .footer {
     height: 60px;
@@ -24,6 +107,7 @@ body {
     border-top: 1px solid #ddd;
     padding-top: 20px;
 }
+
 
 .not-set {
     color: #c55;
@@ -42,4 +126,24 @@ body {
     border-left: 3px solid #eed3d7;
     padding: 10px 20px;
     margin: 0 0 15px 0;
+}
+
+.loader {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 25px;
+    height: 25px;
+    margin-left: -12.5px;
+    margin-top: -12.5px;
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #3498db; /* Blue */
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

@@ -11,15 +11,19 @@ $this->title = 'Abusers';
         <?= Html::dropDownList('date', null, $months, ['class'=>'form-control']); ?>
         <button class="btn btn-primary" name="report">Show report</button>
         <button class="btn btn-secondary" name="generate">Generate data</button>
+        <div class="loader"></div>
     </form>
-    
-    <table id="abusers" class="table table-hover">
-        <thead><tr>
-            <th>Company</th>
-            <th>Used</th>
-            <th>Quota</th>
-        </tr></thead>
-        <tbody>
-        </tbody>
-    </table>
+
+    <div id="abusers" class="table-container">
+        <div class="loader"></div>
+        <table id="abusers" class="table table-hover">
+            <thead><tr>
+                <th class="company">Company</th>
+                <th class="used">Used</th>
+                <th class="quota">Quota</th>
+            </tr></thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </div>

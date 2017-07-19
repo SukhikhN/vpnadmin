@@ -1,4 +1,7 @@
 $(function() {
+    var $doc = $(document),
+        $pjax = $('#pjax');
+    
     /**
      * Execute controller function based on current action
      */
@@ -96,16 +99,25 @@ $(function() {
      */
     function actionAbusers() {
         var $container = $('#abusers-container'),
-            $abusersRows = $container.find('#abusers tbody');
+            $abusers = $container.find('#abusers'),
+            $abusersRows = $abusers.find('tbody');
         
         //generate traffic data
         $container.on('click', '[name="generate"]', function() {
+            var $btn = $(this),
+                $form = $btn.closest('form');
+            $form.addClass('loading');
+            $btn.prop('disabled', true);
+            
             Api.generateTrafficData().done(function() {
                 //reload page because months list may be changed
                 $.pjax.reload('#pjax');
                 alert('Traffic data generated successfully');
             }).fail(function(error) {
                 alert(error);
+            }).always(function() {
+                $form.removeClass('loading');
+                $btn.prop('disabled', false);
             });
             
             return false;
@@ -116,6 +128,7 @@ $(function() {
             var date = $container.find('[name="date"]').val();
             
             $abusersRows.empty();
+            $abusers.addClass('loading');
             
             if (date===null)
                 return false;
@@ -127,14 +140,28 @@ $(function() {
                 }
             }).fail(function(error) {
                 alert(error);
+            }).always(function() {
+                $abusers.removeClass('loading');
             });
             
             return false;
         });
     }
     
+    $doc.on('pjax:click', function(options) {
+        $('#tabs').find('li').removeClass('active');
+        $(options.target).closest('li').addClass('active');
+    });
+    $doc.on('pjax:send', function(xhr, options) {
+        $pjax.addClass('loading');
+    });
+    $doc.on('pjax:complete', function(xhr, textStatus, options) {
+        $pjax.removeClass('loading');
+    });
+    
+    
     //run actions on pjax navigation and after normal page load
-    $(document).on('pjax:end', function(xhr, options) {
+    $doc.on('pjax:end', function(xhr, options) {
         doAction();
     });
     doAction();

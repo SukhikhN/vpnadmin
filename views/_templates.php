@@ -2,9 +2,10 @@
 <tr class="data-row">
     <td><%= name %></td>
     <td><%= bToTb(quota) %> TB</td>
-    <td>
+    <td class="controls">
         <button class="btn btn-secondary" name="edit">Edit</button>
         <button class="btn btn-danger" name="delete">Delete</button>
+        <div class="loader"></div>
     </td>
 </tr>
 </script>
@@ -14,9 +15,10 @@
         <td><%= name %></td>
         <td><%= email %></td>
         <td><%= company.name %></td>
-        <td>
+        <td class="controls">
             <button class="btn btn-secondary" name="edit">Edit</button>
             <button class="btn btn-danger" name="delete">Delete</button>
+            <div class="loader"></div>
         </td>
     </tr>
 </script>
